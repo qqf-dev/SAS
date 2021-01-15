@@ -48,6 +48,7 @@ The file system is follow these rules:
 
 ###### 以下规则是为了规范组员分享代码在github上。如果你不熟悉或是不想那么麻烦，就只用拖动文件到"main"分支下的"upload"文件夹即可
 
+![avatar](guide.png)
 
 If any partner want to use github to join this work, please follow these rules:
 
@@ -55,7 +56,6 @@ If any partner want to use github to join this work, please follow these rules:
 * You can push your code or merge your branch into the **"main"** branch, but pleaso follow the rule of file system.
 * Everything you push into the github is public in the invited group. If you have anything unable to share, please keep it on your own computer.
 * Even there are other code for lab assignment or else, please finish your work by yourself.
-
 
 如果任意成员想通过github完成工作，请遵循以下规则：
 
