@@ -44,9 +44,9 @@ The file system is follow these rules:
 
 ---
 
-###### The rules is for the partner using github to share code. If you don't familar to use github, just push the file into the upload file in the "upload" in the "main" branch.
+> ###### The rules is for the partner using github to share code. If you don't familar to use github, just push the file into the upload file in the "upload" in the "main" branch.
 
-###### 以下规则是为了规范组员分享代码在github上。如果你不熟悉或是不想那么麻烦，就只用拖动文件到"main"分支下的"upload"文件夹即可
+> ###### 以下规则是为了规范组员分享代码在github上。如果你不熟悉或是不想那么麻烦，就只用拖动文件到"main"分支下的"upload"文件夹即可
 
 ![avatar](guide.png)
 
