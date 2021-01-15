@@ -48,6 +48,8 @@ The file system is follow these rules:
 
 > ###### 以下规则是为了规范组员分享代码在github上。如果你不熟悉或是不想那么麻烦，就只用拖动文件到"main"分支下的"upload"文件夹即可
 
+click the **"image"** to see the guide
+点击 **"image"** 查看指引
 ![image](https://github.com/qqf-dev/SAS/tree/main/guide.png)
 
 If any partner want to use github to join this work, please follow these rules:
