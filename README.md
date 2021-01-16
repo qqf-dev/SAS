@@ -1,6 +1,6 @@
 # SAS
 
-This git project is about the work on Signal and System lab and project, bulided by qqf-dev.
+This git project is about the work on Signal and System lab and project, built by qqf-dev.
 
 This work is based on **MATLAB**.
 
