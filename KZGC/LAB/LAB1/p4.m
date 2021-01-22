@@ -1,0 +1,10 @@
+num2 = [100];
+den2 = conv([1 0],[1,15]);
+num1 = [5 1];
+den1 = [1 0];
+[num3,den3] = feedback(num2,den2,1,1,1);
+[num4,den4] = series(num1,den1,num3,den3)
+[num,den] = feedback(num4,den4,1,1,-1)
+sys = tf(num,den)
+[z,p,k] = tf2zp(num,den)
+sys = zpk(z,p,k)
