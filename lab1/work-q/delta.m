@@ -5,7 +5,7 @@ function [output] = delta(startP, endP, n)
     % @endP is the end point
     % @n is the pulse point
 
-    output = zeros(endP - startP + 1); % init a series size equal the input
+    output = zeros(1, endP - startP + 1); % init a series size equal the input
 
     if startP <= n% has pulse when n >= start point
 
