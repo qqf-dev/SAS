@@ -16,11 +16,13 @@ item: ...
 
 clear;
 clc;
-n = -5:5; % define the variable n
-x1 = zeros(length(n));
-x1((length(n)+1)/2) = 1;
-y1 = sin((pi / 2) * x1);
+Nmin = -5; % set start point
+Nmax = 5;
+n = Nmin:Nmax; % define the variable n
 
+x1 = delta(Nmin, Nmax, 0);
+
+y1 = sin((pi / 2) * x1);
 x2 = 2 .* x1;
 y2 = sin((pi / 2) * x2);
 figure(1);
@@ -32,13 +34,15 @@ hold off
 % b)
 clear;
 clc;
-n = -5:5;
-x = zeros(length(n));
-for index = n
-    if index > 0;
-        x(index+6) = 1;
-    end
-end 
+Nmin = -50;
+Nmax = 50;
+
+n = Nmin:Nmax;
+y = zeros(length(n));
+
+for li = 1:50
+    y = y + sin(li) * delta(Nmin, Nmax, li - 30);
+end
 
 figure(2);
-stem(n,x)
+stem(n, y)
