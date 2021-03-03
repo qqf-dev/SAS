@@ -13,8 +13,9 @@ item: ...
 
 %% a)
 
-% y[n] = sin( (pi/2) x[n] )
-% signals x_1[n] = \delta[n] and x_2[n] = 2\delta[n]
+% show y[n] = sin((pi/2)x[n]) is not linear.
+% use x_1[n] = delta[n]
+% use x_2[n] = 2 delta[n]
 
 clear;
 clc;
@@ -23,7 +24,6 @@ Nmax = 5;
 n = Nmin:Nmax; % define the variable n
 
 x1 = delta(Nmin, Nmax, 0);
-
 y1 = sin((pi / 2) * x1);
 x2 = 2 .* x1;
 y2 = sin((pi / 2) * x2);
@@ -34,10 +34,13 @@ stem(n, y1, 'ro');
 hold off
 
 %% b)
+% show y[n] = x[n] + x[n+1] is not causal
+% use x[n] = delta[n]
+
 clear;
 clc;
 Nmin = -5;
-Nmax = 9;
+Nmax = 5;
 
 n = Nmin:Nmax;
 x1 = stage(Nmin, Nmax, 0);
@@ -49,6 +52,8 @@ figure(2);
 stem(n, y)
 
 %% c)
+% show y[n] = log(x[n]) is not linear
+
 clear;
 clc;
 Nmin = 0;
@@ -67,6 +72,8 @@ stem(n, y2);
 hold off
 
 %% d)
+% system in a) is not invertible
+
 clear;
 clc;
 Nmin = -5; % set start point
@@ -74,90 +81,165 @@ Nmax = 5;
 n = Nmin:Nmax; % define the variable n
 
 x1 = delta(Nmin, Nmax, 0);
-y1 = sin((pi / 2) * x1);
-x2 = 5 .* x1;
-y2 = sin((pi / 2) * x2);
+y1 = sin((pi / 4) * x1);
+x2 = 3 .* x1;
+y2 = sin((pi / 4) * x2);
 figure(4);
 stem(n, y2, 'b+');
 hold on
 stem(n, y1, 'ro');
 hold off
 
+%%% give conunter-argument of oriperties: linear, time-invariant, causal, stable and invertible
+
 %% e)
+% y[n] = x^3[n]
+
 clear;
 clc;
 Nmin = -5;
 Nmax = 5;
 n = Nmin:Nmax;
-
-x00 = n;
-x10 = delta(Nmin, Nmax, 0);
-x20 = 2 * n;
-x30 = n.^2;
-
-x01 = sin(x00);
-x02 = cos(x00);
-x03 = exp(x00);
-x04 = log(x00);
-
-x11 = sin(x10);
-x12 = cos(x10);
-x13 = exp(x10);
-x14 = log(x10);
-
-x21 = sin(x20);
-x22 = cos(x20);
-x23 = exp(x20);
-x24 = log(x20);
-
-x31 = sin(x30);
-x32 = cos(x30);
-x33 = exp(x30);
-x34 = log(x30);
-
-x0 = [x00; x01; x02; x03; x04];
-x1 = [x10; x11; x12; x13; x14];
-x2 = [x20; x21; x22; x23; x24];
-x3 = [x30; x31; x32; x33; x34];
-
-s = ["ro" "go" "bo" "mo" "ko" "r+" "g+" "b+" "m+" "k+"];
-
-y = x0.^3;
-
 figure(5);
 hold on;
 
-for li = 1:5
-    subplot(3, 2, li)
-    stem(n, y(li, :), s(li));
-end
+% linear: False
+% x_1[n] = n
+% x_2[n] = 2n
+% 2 * y_1[n] should equal y_2[n] if linear
 
-% stem(n, y(2));
-% stem(n, y(3));
-% stem(n, y(4));
-% stem(n, y(5));
+x1 = n;
+y1 = x1.^3;
+x2 = 2 .* n;
+y2 = x2.^3;
 
-% %% f)
-% clear;
-% clc;
-% Nmin = -5;
-% Nmax = 5;
-% n = Nmin:Nmax;
+stem(n, 2 .* y1, 'ro');
+stem(n, y2, 'b+')
 
-% x = n;
-% y = n .* x;
+% time-invariant: True
 
-% figure(6);
-% stem(n, y);
+% causal: True
 
-% %% g)
-% clear;
-% clc;
-% Nmin = -5;
-% Nmax = 5;
-% n = Nmin:Nmax;
+% stable: True
 
-% x = 2 * n;
-% y = x;
-% figure(7);
-% stem(n, y);
+% invertible: True
+
+%% f)
+% y[n] = n x[n]
+
+clear;
+clc;
+Nmin = -5;
+Nmax = 5;
+n = Nmin:Nmax;
+figure(6);
+
+% linear: True
+
+% time-invariant: False
+% x_1[n] = n
+% x_2[n] = n - 1 = x[n - 1]
+% y_1[n] = n^2
+% y_2[n] = n^2 - n
+% y_1[n - 1] = (n - 1)^2 != y_2[n]
+
+x1 = n;
+x2 = n - 1;
+y1 = n .* x1;
+y2 = n .* x2;
+y1_ = (n - 1) .* x2;
+
+subplot(3, 1, 1);
+stem(n, 2 .* y1, 'ro');
+hold on
+stem(n, y2, 'b+');
+stem(n, y1_, 'bo');
+
+% causal: True
+
+% stable: False
+% x[n] = stage(n) bounded in [0, 1]
+% y[n] = n stage(n) is not bounded. [0, Infinity)
+
+x = stage(Nmin, Nmax, 0);
+y = n .* x;
+
+subplot(3, 1, 2);
+stem(n, y, 'ro');
+
+% invertible: False
+% x_1[n] = delta[n]
+% x_2[n] = 2 delta[n]
+% y[n] = 0
+
+x1 = delta(Nmin, Nmax, 0);
+x2 = 2 .* x1;
+y1 = n .* x1;
+y2 = n .* x2;
+
+subplot(3, 1, 3);
+stem(n, y1,'ro');
+hold on
+stem(n, y2,'b+');
+
+
+hold off
+
+%% g)
+% y[n] = x[2n]
+
+clear;
+clc;
+Nmin = -5;
+Nmax = 5;
+n = Nmin:Nmax;
+figure(7)
+hold on
+
+% linear: True
+
+% time-invariant: False
+% x_1[n] = n
+% x_2[n] = x_1[n-1] = n=1
+% y_1[n] = x_1[2n] = 2n
+% y_2[n] = x_2[2n] = x_1[2n-1] = 2n-1
+% y_1[n-1] = x_1[2(n-1)] = 2n-2
+
+x1 = n;
+x2 = n - 1;
+y1 = 2 .* n;
+y2 = 2 .* n - 1;
+y1_ = 2 .* (n - 1);
+
+subplot(3, 1, 1);
+stem(n, y1, 'ro');
+hold on
+stem(n, y2, 'bo');
+stem(n, y1_, 'b+');
+
+% causal: False
+% x[n] = stage[n - 1]
+% y[n] = stage[2n - 1]
+% y[1] = x[2]
+
+x = stage(Nmin, Nmax, 1);
+y = stage(Nmin, Nmax, 0.5);
+subplot(3, 1, 2);
+stem(n, x, 'ro');
+hold on
+stem(n, y, 'bo');
+
+% stable: True
+
+% invertible: False
+% x_1[n] = cos(pi * n)
+% x_2[n] = 1
+
+x1 = cos(pi * n);
+x2 = ones(1, Nmax - Nmin + 1);
+y1 = cos(pi * 2 * n);
+y2 = x2;
+subplot(3, 1, 3);
+stem(n, y1, 'ro');
+hold on
+stem(n, y2, 'b+');
