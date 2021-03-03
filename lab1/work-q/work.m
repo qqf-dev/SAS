@@ -3,19 +3,18 @@ TODO:list
 note:1. 1.4 on book
 done:Basic problems:a and b
 done:Intermediate problems:c and d
-item:Advaced Problems:e and f
+done:Advanced Problems:e and f
 
 note:2. 1.5 on book
-item: ...
-    %}
+item:Advanced problems:a, b, c and d
+%}
 
 %%% work1.4
 
 %% a)
-
-% show y[n] = sin((pi/2)x[n]) is not linear.
-% use x_1[n] = delta[n]
-% use x_2[n] = 2 delta[n]
+% show y[n] = sin((pi/2)x[n]) is not linear;
+% use x_1[n] = delta[n];
+% use x_2[n] = 2 delta[n];
 
 clear;
 clc;
@@ -34,8 +33,8 @@ stem(n, y1, 'ro');
 hold off
 
 %% b)
-% show y[n] = x[n] + x[n+1] is not causal
-% use x[n] = delta[n]
+% show y[n] = x[n] + x[n+1] is not causal;
+% use x[n] = delta[n];
 
 clear;
 clc;
@@ -72,7 +71,7 @@ stem(n, y2);
 hold off
 
 %% d)
-% system in a) is not invertible
+% system in a) is not invertible;
 
 clear;
 clc;
@@ -178,10 +177,9 @@ y1 = n .* x1;
 y2 = n .* x2;
 
 subplot(3, 1, 3);
-stem(n, y1,'ro');
+stem(n, y1, 'ro');
 hold on
-stem(n, y2,'b+');
-
+stem(n, y2, 'b+');
 
 hold off
 
@@ -243,3 +241,19 @@ subplot(3, 1, 3);
 stem(n, y1, 'ro');
 hold on
 stem(n, y2, 'b+');
+
+
+%%% work1.5
+
+%% a)
+
+clear;
+clc;
+Nmin = 0;
+Nmax = 5;
+n = Nmin:Nmax;
+
+figure(8)
+y = diffeqn(2, n, -1)
+hold on
+stem(n, y)

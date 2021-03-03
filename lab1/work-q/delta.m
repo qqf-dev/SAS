@@ -6,7 +6,8 @@ function [output] = delta(startP, endP, n)
     % @n is the pulse point
 
     output = zeros(1, endP - startP + 1); % init a series size equal the input
-
+    
+    n = ceil(n);
     if startP <= n% has pulse when n >= start point
 
         if endP >= n% has pulse when n <= end point
