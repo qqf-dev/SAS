@@ -7,5 +7,6 @@ plot(x,y2)
 stem(y)
 stem(x,y)
 title('This is the sinus function')
+grid on;
 xlabel('x (secs)')
 ylabel('sin(x)')

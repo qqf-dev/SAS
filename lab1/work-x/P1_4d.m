@@ -1,0 +1,12 @@
+clc;
+clear;
+X1=[-5:1:5];
+x1=[zeros(1,5) 1 zeros(1,5)];
+x2=[zeros(1,5) 5 zeros(1,5)];
+y1=sin((pi/2)*x1);
+y2=sin((pi/2)*x2);
+subplot(2,1,1);
+grid on;
+subplot(2,1,1),stem(X1,y1);
+hold on;
+subplot(2,1,2),stem(X1,y2);

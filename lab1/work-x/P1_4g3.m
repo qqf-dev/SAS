@@ -1,0 +1,13 @@
+clc;
+clear;
+X1=[-5:1:5];
+y1=[zeros(1,5) ones(1,6)];
+y2=[zeros(1,5) ones(1,6)];
+y3=[ones(1,6) zeros(1,5)];
+y4=[zeros(1,5) ones(1,6)];
+subplot(4,1,1);
+grid on;
+subplot(4,1,1),stem(X1,y1);
+subplot(4,1,2),stem(X1,y2);
+subplot(4,1,3),stem(X1,y3);
+subplot(4,1,4),stem(X1,y4);
