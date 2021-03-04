@@ -245,15 +245,10 @@ stem(n, y2, 'b+');
 
 %%% work1.5
 
+% y[n] = a * y[n-1] + x[n]
+
 %% a)
+% y = diffeqn(a, x, yn1)
+% see file diffeqn.m
 
-clear;
-clc;
-Nmin = 0;
-Nmax = 5;
-n = Nmin:Nmax;
-
-figure(8)
-y = diffeqn(2, n, -1)
-hold on
-stem(n, y)
+%% b)
