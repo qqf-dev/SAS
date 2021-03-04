@@ -205,7 +205,7 @@ hold on
 
 x1 = n;
 x2 = n - 1;
-y1 = 2 .* n;
+y1 = 2 .* x1;
 y2 = 2 .* n - 1;
 y1_ = 2 .* (n - 1);
 
@@ -242,7 +242,6 @@ stem(n, y1, 'ro');
 hold on
 stem(n, y2, 'b+');
 
-
 %%% work1.5
 
 % y[n] = a * y[n-1] + x[n]
@@ -252,3 +251,75 @@ stem(n, y2, 'b+');
 % see file diffeqn.m
 
 %% b)
+% a = 1, yn1 = -1, 0 <= n <= 30
+% x1[n] = delta[n]
+% x2[n] = stage[n]
+
+clear;
+clc;
+
+a = 1;
+yn1 = -1;
+n = 0:30;
+x1 = delta(0, 30, 0);
+x2 = stage(0, 30, 0);
+y1 = diffeqn(a, x1, yn1);
+y2 = diffeqn(a, x2, yn1);
+
+figure(8)
+subplot(2, 1, 1);
+stem(n, y1, 'ro');
+hold on;
+subplot(2, 1, 2);
+stem(n, y2, 'bo');
+
+%% c)
+% a = 1, yn1 = -1, 0 <= n <= 30
+% x_1[n] = stage[n]
+% x_2[n] = 2 * stage[n]
+% stem 2*y_1[n] - y_2[n]
+
+clear;
+clc;
+
+a = 1;
+yn1 = -1;
+n = 0:30;
+
+x1 = stage(0, 30, 0);
+x2 = 2 * x1;
+
+y1 = diffeqn(a, x1, yn1);
+y2 = diffeqn(a, x2, yn1);
+y3 = 2 * y1 - y2;
+
+figure(9);
+subplot(3, 1, 1);
+stem(n, y1, 'ro');
+hold on
+subplot(3, 1, 2);
+stem(n, y2, 'go');
+subplot(3, 1, 3);
+stem(n, y3, 'bo');
+
+%% d)
+% a = 1/2, x[n] = stage[n], 0 <= n <= 30;
+% yn1 = 0, 1/2;
+
+clear;
+clc;
+
+a = 1/2;
+n = 0:30;
+x = stage(0, 30, 0);
+yn11 = 0;
+yn12 = 1/2;
+y1 = diffeqn(a, x, yn11);
+y2 = diffeqn(a, x, yn12);
+
+figure(10);
+subplot(2, 1, 1);
+stem(n, y1, 'ro');
+hold on
+subplot(2, 1, 2);
+stem(n, y2, 'bo');
