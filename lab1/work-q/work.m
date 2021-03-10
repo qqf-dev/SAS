@@ -30,6 +30,7 @@ figure(1)
 stem(n, y2, 'b+');
 hold on
 stem(n, y1, 'ro');
+grid on
 hold off
 grid on
 
@@ -39,24 +40,27 @@ grid on
 
 clear;
 clc;
-Nmin = -5;
-Nmax = 5;
+xNmin = -5;
+xNmax = 9;
+yMin = -6;
+yMax = 9;
 
-n = Nmin:Nmax;
-x = stage(Nmin, Nmax, 0);
-x_ = stage(Nmin, Nmax, -1);
+xn = xNmin:xNmax;
+x1 = stage(Nmin, Nmax, 0);
+x2 = stage(Nmin, Nmax, 1);
 
-y = x + x_;
+yn = yNmin:yNmax;
+y = x1 + x2;
+y = y[1,2:];
 
-figure(2)
-stem(n, x);
-hold on
-stem(n, y);
-hold off
+figure(2);
+subplot(2,1,1)
+stem(, y)
+grid on
 grid on
 
 %% c)
-% show y[n] = log(x[n]) is not linear
+% show y[n] = log(x[n]) is not stable
 
 clear;
 clc;
@@ -73,11 +77,12 @@ figure(3);
 plot(t, y1);
 hold on
 stem(n, y2);
+grid on
 hold off
 grid on
 
 %% d)
-% system in a) is not invertible;
+% system in a) y[n] = sin((pi/2)x[n]) is not invertible;
 
 clear;
 clc;
@@ -91,8 +96,10 @@ x2 = 3 .* x1;
 y2 = sin((pi / 4) * x2);
 figure(4);
 stem(n, y2, 'b+');
+grid on
 hold on
 stem(n, y1, 'ro');
+grid on
 hold off
 grid on
 
@@ -121,7 +128,6 @@ y2 = x2.^3;
 
 stem(n, 2 .* y1, 'ro');
 stem(n, y2, 'b+')
-hold off
 grid on
 
 % time-invariant: True
@@ -146,7 +152,7 @@ figure(6);
 
 % time-invariant: False
 % x_1[n] = n
-% x_2[n] = n - 1 = x[n - 1]
+% x_2[n] = x[n - 1] = n - 1
 % y_1[n] = n^2
 % y_2[n] = n^2 - n
 % y_1[n - 1] = (n - 1)^2 != y_2[n]
@@ -162,6 +168,7 @@ stem(n, 2 .* y1, 'ro');
 hold on
 stem(n, y2, 'b+');
 stem(n, y1_, 'bo');
+grid on
 
 hold off
 grid on
@@ -176,6 +183,7 @@ y = n .* x;
 
 subplot(3, 1, 2);
 stem(n, y, 'ro');
+grid on
 
 hold off
 grid on
@@ -194,6 +202,7 @@ subplot(3, 1, 3);
 stem(n, y1, 'ro');
 hold on
 stem(n, y2, 'b+');
+grid on
 
 hold off
 grid on
@@ -228,6 +237,7 @@ stem(n, y1, 'ro');
 hold on
 stem(n, y2, 'bo');
 stem(n, y1_, 'b+');
+grid on
 
 hold off
 grid on
@@ -243,7 +253,6 @@ subplot(3, 1, 2);
 stem(n, x, 'ro');
 hold on
 stem(n, y, 'bo');
-hold off
 grid on
 
 % stable: True
@@ -260,6 +269,7 @@ subplot(3, 1, 3);
 stem(n, y1, 'ro');
 hold on
 stem(n, y2, 'b+');
+grid on
 
 hold off
 grid on
@@ -291,6 +301,7 @@ y2 = diffeqn(a, x2, yn1);
 figure(8)
 subplot(2, 1, 1);
 stem(n, y1, 'ro');
+grid on
 hold on;
 
 hold off
@@ -298,6 +309,7 @@ grid on
 
 subplot(2, 1, 2);
 stem(n, y2, 'bo');
+grid on
 
 hold off
 grid on
@@ -325,6 +337,7 @@ y3 = 2 * y1 - y2;
 figure(9);
 subplot(3, 1, 1);
 stem(n, y1, 'ro');
+grid on
 hold on
 
 hold off
@@ -338,6 +351,7 @@ grid on
 
 subplot(3, 1, 3);
 stem(n, y3, 'bo');
+grid on
 
 hold off
 grid on
@@ -360,6 +374,7 @@ y2 = diffeqn(a, x, yn12);
 figure(10);
 subplot(2, 1, 1);
 stem(n, y1, 'ro');
+grid on
 hold on
 grid on
 subplot(2, 1, 2);
