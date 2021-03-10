@@ -42,21 +42,29 @@ clear;
 clc;
 xNmin = -5;
 xNmax = 9;
-yMin = -6;
-yMax = 9;
+yNmin = -6;
+yNmax = 9;
 
 xn = xNmin:xNmax;
-x1 = stage(Nmin, Nmax, 0);
-x2 = stage(Nmin, Nmax, 1);
+x1 = stage(xNmin, xNmax, 0);
+x2 = stage(xNmin, xNmax, -1);
 
 yn = yNmin:yNmax;
-y = x1 + x2;
-y = y[1,2:];
+y = yn;
+y(1) = 0;
+y(1, 2:end) = x1 + x2;
 
 figure(2);
-subplot(2,1,1)
-stem(, y)
+subplot(3, 1, 1)
+stem(xn, x1)
 grid on
+
+subplot(3, 1, 2)
+stem(xn, x2)
+grid on
+
+subplot(3, 1, 3)
+stem(yn, y)
 grid on
 
 %% c)
@@ -64,10 +72,10 @@ grid on
 
 clear;
 clc;
-Nmin = 0;
+Nmin = -1;
 Nmax = 10;
 
-t = linspace(0, 10, 100);
+t = linspace(-1, 10, 110);
 n = Nmin:Nmax;
 
 y1 = log(t);

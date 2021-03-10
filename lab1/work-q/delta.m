@@ -7,7 +7,8 @@ function [output] = delta(startP, endP, k)
 
     output = zeros(1, endP - startP + 1); % init a series size equal the input
     
-    n = ceil(n);
+    n = ceil(k); % remove the demical
+
     if startP <= n% has pulse when n >= start point
 
         if endP >= n% has pulse when n <= end point
