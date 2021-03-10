@@ -1,7 +1,7 @@
 clc;
 clear;
-X1=[0:1:6];
-x2=linspace(0,6,200);
+X1=[-6:1:6];
+x2=linspace(-6,6,200);
 y1=log(X1);
 y2=log(x2);
 grid on;
