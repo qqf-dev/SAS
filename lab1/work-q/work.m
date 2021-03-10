@@ -6,7 +6,7 @@ done:Intermediate problems:c and d
 done:Advanced Problems:e and f
 
 note:2. 1.5 on book
-item:Advanced problems:a, b, c and d
+done:Advanced problems:a, b, c and d
 %}
 
 %%% work1.4
@@ -26,15 +26,16 @@ x1 = delta(Nmin, Nmax, 0);
 y1 = sin((pi / 2) * x1);
 x2 = 2 .* x1;
 y2 = sin((pi / 2) * x2);
-figure(1);
+figure(1)
 stem(n, y2, 'b+');
 hold on
 stem(n, y1, 'ro');
 hold off
+grid on
 
 %% b)
 % show y[n] = x[n] + x[n+1] is not causal;
-% use x[n] = delta[n];
+% use x[n] = stage[n]
 
 clear;
 clc;
@@ -42,13 +43,17 @@ Nmin = -5;
 Nmax = 5;
 
 n = Nmin:Nmax;
-x1 = stage(Nmin, Nmax, 0);
-x2 = stage(Nmin, Nmax, 1);
+x = stage(Nmin, Nmax, 0);
+x_ = stage(Nmin, Nmax, -1);
 
-y = x1 + x2;
+y = x + x_;
 
-figure(2);
-stem(n, y)
+figure(2)
+stem(n, x);
+hold on
+stem(n, y);
+hold off
+grid on
 
 %% c)
 % show y[n] = log(x[n]) is not linear
@@ -69,6 +74,7 @@ plot(t, y1);
 hold on
 stem(n, y2);
 hold off
+grid on
 
 %% d)
 % system in a) is not invertible;
@@ -88,6 +94,7 @@ stem(n, y2, 'b+');
 hold on
 stem(n, y1, 'ro');
 hold off
+grid on
 
 %%% give conunter-argument of oriperties: linear, time-invariant, causal, stable and invertible
 
@@ -114,6 +121,8 @@ y2 = x2.^3;
 
 stem(n, 2 .* y1, 'ro');
 stem(n, y2, 'b+')
+hold off
+grid on
 
 % time-invariant: True
 
@@ -154,17 +163,22 @@ hold on
 stem(n, y2, 'b+');
 stem(n, y1_, 'bo');
 
+hold off
+grid on
+
 % causal: True
 
 % stable: False
-% x[n] = stage(n) bounded in [0, 1]
-% y[n] = n stage(n) is not bounded. [0, Infinity)
-
+% x[n] = stage[n] bounded in [0, 1]
+% y[n] = n stage[n] is not bounded. [0, Infinity)
 x = stage(Nmin, Nmax, 0);
 y = n .* x;
 
 subplot(3, 1, 2);
 stem(n, y, 'ro');
+
+hold off
+grid on
 
 % invertible: False
 % x_1[n] = delta[n]
@@ -182,6 +196,7 @@ hold on
 stem(n, y2, 'b+');
 
 hold off
+grid on
 
 %% g)
 % y[n] = x[2n]
@@ -192,7 +207,6 @@ Nmin = -5;
 Nmax = 5;
 n = Nmin:Nmax;
 figure(7)
-hold on
 
 % linear: True
 
@@ -215,6 +229,9 @@ hold on
 stem(n, y2, 'bo');
 stem(n, y1_, 'b+');
 
+hold off
+grid on
+
 % causal: False
 % x[n] = stage[n - 1]
 % y[n] = stage[2n - 1]
@@ -226,6 +243,8 @@ subplot(3, 1, 2);
 stem(n, x, 'ro');
 hold on
 stem(n, y, 'bo');
+hold off
+grid on
 
 % stable: True
 
@@ -241,6 +260,9 @@ subplot(3, 1, 3);
 stem(n, y1, 'ro');
 hold on
 stem(n, y2, 'b+');
+
+hold off
+grid on
 
 %%% work1.5
 
@@ -270,8 +292,15 @@ figure(8)
 subplot(2, 1, 1);
 stem(n, y1, 'ro');
 hold on;
+
+hold off
+grid on
+
 subplot(2, 1, 2);
 stem(n, y2, 'bo');
+
+hold off
+grid on
 
 %% c)
 % a = 1, yn1 = -1, 0 <= n <= 30
@@ -297,10 +326,21 @@ figure(9);
 subplot(3, 1, 1);
 stem(n, y1, 'ro');
 hold on
+
+hold off
+grid on
+
 subplot(3, 1, 2);
 stem(n, y2, 'go');
+
+hold off
+grid on
+
 subplot(3, 1, 3);
 stem(n, y3, 'bo');
+
+hold off
+grid on
 
 %% d)
 % a = 1/2, x[n] = stage[n], 0 <= n <= 30;
@@ -321,5 +361,9 @@ figure(10);
 subplot(2, 1, 1);
 stem(n, y1, 'ro');
 hold on
+grid on
 subplot(2, 1, 2);
 stem(n, y2, 'bo');
+
+hold off
+grid on

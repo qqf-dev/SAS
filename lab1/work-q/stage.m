@@ -1,14 +1,15 @@
-function [output] = stage(startP, endP, n)
+function [output] = stage(startP, endP, k)
     %%
     %
     %
 
+    k = ceil(k);
+
     output = zeros(1, endP - startP +1);
 
-    n = ceil(n);
-    if n < startP
+    if k < startP
         output = ones(1, endP - startP + 1);
-    elseif endP >= n% has pulse when n <= end poin
+    elseif endP >= k
         output = [zeros(1, n - startP), ones(1, endP - n + 1)];
     end
 

@@ -1,9 +1,9 @@
-function [output] = delta(startP, endP, n)
-    %% this function can output the unit pulse signal \delta(n)
+function [output] = delta(startP, endP, k)
+    %% this function can output the unit pulse signal \delta[n-k]
     % @output is the result
     % @startP is the start point of the sequence
     % @endP is the end point
-    % @n is the pulse point
+    % @k is the pulse point
 
     output = zeros(1, endP - startP + 1); % init a series size equal the input
     
