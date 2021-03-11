@@ -27,12 +27,13 @@ y1 = sin((pi / 2) * x1);
 x2 = 2 .* x1;
 y2 = sin((pi / 2) * x2);
 figure(1)
-stem(n, y2, 'b+');
+stem(n, y2, 'b*', 'MarkerSize', 15);
 hold on
-stem(n, y1, 'ro');
+stem(n, y1, 'ro', 'MarkerSize', 15);
 grid on
 hold off
-grid on
+xlabel("n", 'fontsize', 15)
+ylabel("y[n]", 'fontsize', 15)
 
 %% b)
 % show y[n] = x[n] + x[n+1] is not causal;
@@ -103,10 +104,10 @@ y1 = sin((pi / 4) * x1);
 x2 = 3 .* x1;
 y2 = sin((pi / 4) * x2);
 figure(4);
-stem(n, y2, 'b+');
+stem(n, y2, 'b+', 'MarkerSize', 15);
 grid on
 hold on
-stem(n, y1, 'ro');
+stem(n, y1, 'ro', 'MarkerSize', 15);
 grid on
 hold off
 grid on
@@ -134,8 +135,8 @@ y1 = x1.^3;
 x2 = 2 .* n;
 y2 = x2.^3;
 
-stem(n, 2 .* y1, 'ro');
-stem(n, y2, 'b+')
+stem(n, 2 .* y1, 'ro', 'MarkerSize', 15);
+stem(n, y2, 'b+', 'MarkerSize', 15)
 grid on
 
 % time-invariant: True
