@@ -41,26 +41,28 @@ b2 = 1;
 %%% b)
 
 %% N = 1024
-
 [H1, w1] = freqz(a1, b1, 1024, 'whole');
-figure(1)
-subplot(2,1,1),plot(w1, abs(H1))
+subplot(2, 1, 1), plot(w1, abs(H1))
 grid on;
 
 %% aprroach /pi, increasing, so system 1 is highpass filter
 
 [H2, w2] = freqz(a2, b2, 1024, 'whole');
-subplot(2,1,2),plot(w2, abs(H2))
+subplot(2, 1, 2), plot(w2, abs(H2))
 grid on;
 %% aprroach /pi, decreasing, so system 2 is lowpass filter
 
 %%% c)
 
+a_k = [-1/2 0 0 0 0 0 0 0 3/4 0 3/4 0 0 0 0 0 0 0 -1/2 0];
 
-a_x = [0 3/4 0 0 0 0 0 0 0 -1/2 0 0 0 0 0 0 0 0 0 0];
+k = 0:19;
+
+wk = 2 * pi / 20 * k;
 figure(2)
+stem(wk, a_k)
 
-
-
-
-
+%%% d)
+a_x = length(a_k) * ifft(a_k);
+figure(3)
+stem(0:19, abs(a_x))
