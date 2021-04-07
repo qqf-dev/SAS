@@ -1,0 +1,11 @@
+clc;
+clear;
+X1=[-5:1:5];
+y1=[zeros(1,6) 1 zeros(1,4)];
+y2=[zeros(1,7) 1 zeros(1,3)];
+y3=[zeros(1,5) 1 zeros(1,5)];
+grid on;
+stem(X1,y3);
+hold on;
+stem(X1,y1);
+stem(X1,y2);
