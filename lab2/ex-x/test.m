@@ -1,0 +1,11 @@
+A=[1 -0.8];
+B=[2];
+X1=[1 0 0 0 0 ];
+X2=[1 0 0 0 0 0 0 0 0 0];
+X3=[1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
+Y1=filter(B,A,X1);
+Y2=filter(B,A,X2);
+Y3=filter(B,A,X3);
+subplot(3,1,1),stem(Y1);
+subplot(3,1,2),stem(Y2);
+subplot(3,1,3),stem(Y3);
