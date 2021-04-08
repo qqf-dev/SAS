@@ -16,3 +16,4 @@ stem(X1,y1,'r--o');
 hold on;
 stem(X1,y2,'k--x');
 stem(X1,y3,'b--s');
+stem(X1,y3,'b--s');
