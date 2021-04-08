@@ -48,7 +48,6 @@ xlabel('\omega','fontsize',15)
 ylabel('H_1(e^{j\omega})','fontsize',15)
 title('frequency resposes of System 2','FontSize',18)
 
-
 grid on;
 
 %% aprroach /pi, increasing, so system 1 is highpass filter
@@ -72,12 +71,19 @@ k = 0:19;
 
 wk = 2 * pi / 20 * k;
 figure(2)
-stem(wk, a_x);
-hold on;
-plot(w1,abs(H1),'r-');
-plot(w2,abs(H2),'b-');
-
+subplot(2,1,1),stem(wk, a_x);
+grid on;
 xlabel('\omega_k=(2\pi/20)k','fontsize',15)
+ylabel('H_1(e^{j\omega}) and H_2(e^{j\omega})','fontsize',15)
+title('DTFS coefficients of x[n]','FontSize',18)
+subplot(2,1,2),plot(w1,abs(H1),'r-');
+hold on;
+plot(w2,abs(H2),'b-');
+legend('H_1','H_2');
+grid on;
+xlabel('\omega','fontsize',15)
+ylabel('H_1(e^{j\omega}) and H_2(e^{j\omega})','fontsize',15)
+title('frequency resposes of Systems','FontSize',18)
 
 %%% d)
 
@@ -91,7 +97,7 @@ stem(-20:99,x);
 xlabel('n','fontsize',15);
 ylabel('x[n]','fontsize',15);
 title('input signal','fontsize',18)
-
+grid on;
 %%% e)
 
 % using filter
@@ -104,11 +110,14 @@ subplot(2,1,1),stem(-20:99,y1);
 xlabel('n','fontsize',15);
 ylabel('y_1[n]','fontsize',15);
 title('output signal','fontsize',18)
+grid on;
 
 subplot(2,1,2),stem(-20:99,y2);
 xlabel('n','fontsize',15);
 ylabel('y_2[n]','fontsize',15);
 title('output signal','fontsize',18)
+grid on;
+
 %%% f)
 
 % take the value on n = 0:19
@@ -122,6 +131,7 @@ a_y2 = fft(y2_20)/length(y2_20);
 
 figure(5)
 subplot(2,1,1), stem(abs(a_y1));
+grid on;
 subplot(2,1,2), stem(abs(a_y2));
-
+grid on;
 
