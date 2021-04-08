@@ -213,7 +213,6 @@ legend('simulated','analytically determined')
 grid on;
 
 subplot(5, 1, 2), plot(linspace(10, 20, 500), y_2(501:end)),hold on, plot(linspace(10, 20, 500), ya2(501:end) );
-
 title("y2", 'fontsize', 18);
 xlabel("t", 'fontsize', 15);
 ylabel("y_2(t)", 'fontsize', 15);
@@ -228,7 +227,6 @@ legend('simulated','analytically determined')
 grid on;
 
 subplot(5, 1, 4), plot(linspace(10, 20, 500), y_4(501:end)),hold on, plot(linspace(10, 20, 500), ya4(501:end) );
-
 title("y4", 'fontsize', 18);
 xlabel("t", 'fontsize', 15);
 ylabel("y_4(t)", 'fontsize', 15);
@@ -236,7 +234,6 @@ legend('simulated','analytically determined')
 grid on;
 
 subplot(5, 1, 5), plot(linspace(10, 20, 500), y_5(501:end)),hold on, plot(linspace(10, 20, 500), ya5(501:end) );
-
 title("y5", 'fontsize', 18);
 xlabel("t", 'fontsize', 15);
 ylabel("y_5(t)", 'fontsize', 15);
