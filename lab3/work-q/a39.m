@@ -13,6 +13,10 @@ item:f
 
 %}
 
+clear;
+clf;
+clc;
+
 %% H(s) = 1 / (1+RCs)
 %% x(t) = cos(t)
 
@@ -36,8 +40,11 @@ figure(1)
 
 %% 10<=t<=20
 
-plot(linspace(10, 20, 1000), x(10 * 1000:end), 'b')
-plot(linspace(10, 20, 1000), y(10 * 1000:end), 'r')
+plot(linspace(10, 20, 500), x(501:end), 'b')
+hold on;
+plot(linspace(10, 20, 500), y(501:end), 'r')
+grid on;
+legend('x(t)', 'y(t)');
 
 title("response of cos(t)", 'fontsize', 18);
 xlabel("t", 'fontsize', 15);
@@ -53,8 +60,11 @@ x2(x2 < 0) = -ones(size(x2(x2 < 0)));
 y2 = lsim(B, A, x2, t);
 
 figure(2)
-plot(linspace(10, 20, 1000), x2(10 * 1000:end))
-plot(linspace(10, 20, 1000), y2(10 * 1000:end))
+plot(linspace(10, 20, 500), x2(501:end))
+hold on
+plot(linspace(10, 20, 500), y2(501:end))
+grid on;
+legend('x_2(t)', 'y_2(t)');
 
 title("response of sign(cos(t))", 'fontsize', 18);
 xlabel("t", 'fontsize', 15);
@@ -65,84 +75,167 @@ ylabel("x_2(t) and y_2(t)", 'fontsize', 15);
 k = 1:5;
 
 % x2(t) = s(t)-s(t-pi)
-% a_k = 2 sin(k * pi)/ (k pi)
+% a_k = sin(k * pi / 2)./(pi * k) - (-1).^k .* sin(pi * k / 2)./(pi * k);
+
+% when k is even a_k = 0
+
 
 % T = 2pi
 % w0 = 2pi/2pi = 1
 % a0 = 1/(2*pi) integral_{-[pi]}^{pi}(1)dt = 0
 
-apos_k = zeros(5);
-aneg_k = apos_k;
+k = 2.*k - 1;
 
-for li = k
-    apos_k(li) = 2 * sin(li * pi / 2);
-    aneg_k(li) = 2 * sin(-li * pi / 2);
-end
+apos_k = sin(k * pi / 2)./(pi * k) - (-1).^k .* sin(pi * k / 2)./(pi * k);
+aneg_k = sin(-k * pi / 2)./(-pi * k) - (-1).^(-k) .* sin(pi * -k / 2)./(pi * -k);
+ 
 
 s1 = apos_k(1) * exp(1j * t) + aneg_k(1) * exp(-1j * t);
-s2 = apos_k(2) * exp(2j * t) + aneg_k(2) * exp(-2j * t);
-s3 = apos_k(3) * exp(3j * t) + aneg_k(3) * exp(-3j * t);
-s4 = apos_k(4) * exp(4j * t) + aneg_k(4) * exp(-4j * t);
-s5 = apos_k(5) * exp(5j * t) + aneg_k(5) * exp(-5j * t);
+s2 = apos_k(2) * exp(3j * t) + aneg_k(2) * exp(-3j * t);
+s3 = apos_k(3) * exp(5j * t) + aneg_k(3) * exp(-5j * t);
+s4 = apos_k(4) * exp(7j * t) + aneg_k(4) * exp(-7j * t);
+s5 = apos_k(5) * exp(9j * t) + aneg_k(5) * exp(-9j * t);
 
 s = s1 + s2 + s3 + s4 + s5;
 
 figure(3)
 
 plot(t, x2);
+hold on;
 plot(t, s);
+grid on;
+legend('x_2(t)','ssum(t)');
 
 title("sum of harmonic components", 'fontsize', 18);
 xlabel("t", 'fontsize', 15);
-ylabel("x_2(t) and s_<1,5>(t)", 'fontsize', 15);
+ylabel("x_2(t) and ssum(t)", 'fontsize', 15);
 
 %%% d)
 
-clear y;
-clear y2;
 
-y1 = lsim(B, A, s1, t);
-y2 = lsim(B, A, s2, t);
-y3 = lsim(B, A, s3, t);
-y4 = lsim(B, A, s4, t);
-y5 = lsim(B, A, s5, t);
-y_s = lsim(B, A, S, t);
+y_1 = lsim(B, A, s1, t);
+y_2 = lsim(B, A, s2, t);
+y_3 = lsim(B, A, s3, t);
+y_4 = lsim(B, A, s4, t);
+y_5 = lsim(B, A, s5, t);
+y_s = lsim(B, A, s, t);
 
-y = y1 + y2 + y3 + y4 + y5;
+y = y_1 + y_2 + y_3 + y_4 + y_5;
 
 figure(4)
-subplot(5, 1, 1), plot(t, y1);
+subplot(5, 1, 1), plot(t, y_1);
 title("y1", 'fontsize', 18);
 xlabel("t", 'fontsize', 15);
 ylabel("y_1(t)", 'fontsize', 15);
+grid on;
 
-subplot(5, 1, 2), plot(t, y2);
+subplot(5, 1, 2), plot(t, y_2);
 title("y2", 'fontsize', 18);
 xlabel("t", 'fontsize', 15);
 ylabel("y_2(t)", 'fontsize', 15);
+grid on;
 
-subplot(5, 1, 3), plot(t, y3);
+subplot(5, 1, 3), plot(t, y_3);
 title("y3", 'fontsize', 18);
 xlabel("t", 'fontsize', 15);
-ylabel("y_3t)", 'fontsize', 15);
+ylabel("y_3(t)", 'fontsize', 15);
+grid on;
 
-subplot(5, 1, 4), plot(t, y4);
+subplot(5, 1, 4), plot(t, y_4);
 title("y4", 'fontsize', 18);
 xlabel("t", 'fontsize', 15);
-ylabel("y_4t)", 'fontsize', 15);
+ylabel("y_4(t)", 'fontsize', 15);
+grid on;
 
-subplot(5, 1, 5), plot(t, y5);
+subplot(5, 1, 5), plot(t, y_5);
 title("y5", 'fontsize', 18);
 xlabel("t", 'fontsize', 15);
 ylabel("y_5(t)", 'fontsize', 15);
+grid on;
 
 figure(5)
 
-plot(t, y, 'r');
-plot(t, y_s, 'b-');
+subplot(2,1,1),plot(t, y, 'r');
+grid 
 
-title("response of the sum of harmonic components ", 'fontsize',18);
+title("the sum of responses of harmonic components ", 'fontsize', 18);
 xlabel("t", 'fontsize', 15);
-ylabel("y(t) and y_ssum(t)", 'fontsize', 15);
+ylabel("y_(t)", 'fontsize', 15);
+
+subplot(2,1,2),plot(t, y_s, 'b');
+grid on;
+
+title("response of the sum of harmonic components ", 'fontsize', 18);
+xlabel("t", 'fontsize', 15);
+ylabel("y_ssum(t)", 'fontsize', 15);
 
 %%% e)
+figure(6)
+plot(t,y2,'b-');
+hold on;
+plot(t,y_s,'r-');
+grid on;
+
+legend('y2(t)','y_s(t)')
+
+title("comparing of responses", 'fontsize', 18);
+xlabel("t", 'fontsize', 15);
+ylabel("y_2(t) and y_ssum(t)", 'fontsize', 15);
+
+% E = sum( |a_k|^2) = 1
+% E = sum_{-5}^{5}(|a_k|^2)
+
+E = 0;
+
+for li = 1:5
+    E = E + abs(apos_k(li))^2 + abs(aneg_k(li))^2;    
+end
+E
+
+
+
+%%% f)
+
+ya1 = 1/(1+1i)*apos_k(1) * exp(1j * t) + 1/(1-1i)*aneg_k(1) * exp(-1j * t);
+ya2 = 1/(1+3i)*apos_k(2) * exp(3j * t) + 1/(1-1i)*aneg_k(2) * exp(-3j * t);
+ya3 = 1/(1+5i)*apos_k(3) * exp(5j * t) + 1/(1-1i)*aneg_k(3) * exp(-5j * t);
+ya4 = 1/(1+7i)*apos_k(4) * exp(7j * t) + 1/(1-1i)*aneg_k(4) * exp(-7j * t);
+ya5 = 1/(1+9i)*apos_k(5) * exp(9j * t) + 1/(1-1i)*aneg_k(5) * exp(-9j * t);
+
+
+figure(7)
+
+subplot(5, 1, 1), plot(t, y_1),hold on, plot(t, ya1);
+title("y1", 'fontsize', 18);
+xlabel("t", 'fontsize', 15);
+ylabel("y_1(t)", 'fontsize', 15);
+legend('simulated','analytically determined')
+grid on;
+
+subplot(5, 1, 2), plot(t, y_2),hold on, plot(t, ya2);
+title("y2", 'fontsize', 18);
+xlabel("t", 'fontsize', 15);
+ylabel("y_2(t)", 'fontsize', 15);
+legend('simulated','analytically determined')
+grid on;
+
+subplot(5, 1, 3), plot(t, y_3),hold on, plot(t, ya3);
+title("y3", 'fontsize', 18);
+xlabel("t", 'fontsize', 15);
+ylabel("y_3(t)", 'fontsize', 15);
+legend('simulated','analytically determined')
+grid on;
+
+subplot(5, 1, 4), plot(t, y_4),hold on, plot(t, ya4);
+title("y4", 'fontsize', 18);
+xlabel("t", 'fontsize', 15);
+ylabel("y_4(t)", 'fontsize', 15);
+legend('simulated','analytically determined')
+grid on;
+
+subplot(5, 1, 5), plot(t, y_5),hold on, plot(t, ya5);
+title("y5", 'fontsize', 18);
+xlabel("t", 'fontsize', 15);
+ylabel("y_5(t)", 'fontsize', 15);
+legend('simulated','analytically determined')
+grid on;
