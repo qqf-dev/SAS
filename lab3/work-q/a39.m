@@ -197,43 +197,43 @@ E
 %%% f)
 
 ya1 = 1/(1+1i)*apos_k(1) * exp(1j * t) + 1/(1-1i)*aneg_k(1) * exp(-1j * t);
-ya2 = 1/(1+3i)*apos_k(2) * exp(3j * t) + 1/(1-1i)*aneg_k(2) * exp(-3j * t);
-ya3 = 1/(1+5i)*apos_k(3) * exp(5j * t) + 1/(1-1i)*aneg_k(3) * exp(-5j * t);
-ya4 = 1/(1+7i)*apos_k(4) * exp(7j * t) + 1/(1-1i)*aneg_k(4) * exp(-7j * t);
-ya5 = 1/(1+9i)*apos_k(5) * exp(9j * t) + 1/(1-1i)*aneg_k(5) * exp(-9j * t);
+ya2 = 1/(1+3i)*apos_k(2) * exp(3j * t) + 1/(1-3i)*aneg_k(2) * exp(-3j * t);
+ya3 = 1/(1+5i)*apos_k(3) * exp(5j * t) + 1/(1-5i)*aneg_k(3) * exp(-5j * t);
+ya4 = 1/(1+7i)*apos_k(4) * exp(7j * t) + 1/(1-7i)*aneg_k(4) * exp(-7j * t);
+ya5 = 1/(1+9i)*apos_k(5) * exp(9j * t) + 1/(1-9i)*aneg_k(5) * exp(-9j * t);
 
 
 figure(7)
 
-subplot(5, 1, 1), plot(linspace(10, 20, 500), y_1(501:end)),hold on, plot(linspace(10, 20, 500), ya1(501:end) );
+subplot(5, 1, 1), plot(linspace(10, 20, 500), y_1(501:end)),hold on, plot(linspace(10, 20, 500), ya1(501:end) ,'r--');
 title("y1", 'fontsize', 18);
 xlabel("t", 'fontsize', 15);
 ylabel("y_1(t)", 'fontsize', 15);
 legend('simulated','analytically determined')
 grid on;
 
-subplot(5, 1, 2), plot(linspace(10, 20, 500), y_2(501:end)),hold on, plot(linspace(10, 20, 500), ya2(501:end) );
+subplot(5, 1, 2), plot(linspace(10, 20, 500), y_2(501:end)),hold on, plot(linspace(10, 20, 500), ya2(501:end),'r--');
 title("y2", 'fontsize', 18);
 xlabel("t", 'fontsize', 15);
 ylabel("y_2(t)", 'fontsize', 15);
 legend('simulated','analytically determined')
 grid on;
 
-subplot(5, 1, 3), plot(linspace(10, 20, 500), y_3(501:end)),hold on, plot(linspace(10, 20, 500), ya3(501:end) );
+subplot(5, 1, 3), plot(linspace(10, 20, 500), y_3(501:end)),hold on, plot(linspace(10, 20, 500), ya3(501:end) ,'r--');
 title("y3", 'fontsize', 18);
 xlabel("t", 'fontsize', 15);
 ylabel("y_3(t)", 'fontsize', 15);
 legend('simulated','analytically determined')
 grid on;
 
-subplot(5, 1, 4), plot(linspace(10, 20, 500), y_4(501:end)),hold on, plot(linspace(10, 20, 500), ya4(501:end) );
+subplot(5, 1, 4), plot(linspace(10, 20, 500), y_4(501:end)),hold on, plot(linspace(10, 20, 500), ya4(501:end) ,'r--');
 title("y4", 'fontsize', 18);
 xlabel("t", 'fontsize', 15);
 ylabel("y_4(t)", 'fontsize', 15);
 legend('simulated','analytically determined')
 grid on;
 
-subplot(5, 1, 5), plot(linspace(10, 20, 500), y_5(501:end)),hold on, plot(linspace(10, 20, 500), ya5(501:end) );
+subplot(5, 1, 5), plot(linspace(10, 20, 500), y_5(501:end)),hold on, plot(linspace(10, 20, 500), ya5(501:end) ,'r--');
 title("y5", 'fontsize', 18);
 xlabel("t", 'fontsize', 15);
 ylabel("y_5(t)", 'fontsize', 15);

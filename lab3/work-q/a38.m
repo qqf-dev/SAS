@@ -74,7 +74,7 @@ figure(2)
 subplot(2,1,1),stem(wk, a_x);
 grid on;
 xlabel('\omega_k=(2\pi/20)k','fontsize',15)
-ylabel('H_1(e^{j\omega}) and H_2(e^{j\omega})','fontsize',15)
+ylabel('a_k','fontsize',15)
 title('DTFS coefficients of x[n]','FontSize',18)
 subplot(2,1,2),plot(w1,abs(H1),'r-');
 hold on;
