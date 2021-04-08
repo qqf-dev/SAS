@@ -6,7 +6,7 @@ done:Intermediate problems:c and d
 done:Advanced Problems:e and f
 
 note:2. 1.5 on book
-item:Advanced problems:a, b, c and d
+done:Advanced problems:a, b, c and d
 %}
 
 %%% work1.4
@@ -26,39 +26,57 @@ x1 = delta(Nmin, Nmax, 0);
 y1 = sin((pi / 2) * x1);
 x2 = 2 .* x1;
 y2 = sin((pi / 2) * x2);
-figure(1);
-stem(n, y2, 'b+');
+figure(1)
+stem(n, y2, 'b*', 'MarkerSize', 15);
 hold on
-stem(n, y1, 'ro');
+stem(n, y1, 'ro', 'MarkerSize', 15);
+grid on
 hold off
+xlabel("n", 'fontsize', 15)
+ylabel("y[n]", 'fontsize', 15)
 
 %% b)
 % show y[n] = x[n] + x[n+1] is not causal;
-% use x[n] = delta[n];
+% use x[n] = stage[n]
 
 clear;
 clc;
-Nmin = -5;
-Nmax = 5;
+xNmin = -5;
+xNmax = 9;
+yNmin = -6;
+yNmax = 9;
 
-n = Nmin:Nmax;
-x1 = stage(Nmin, Nmax, 0);
-x2 = stage(Nmin, Nmax, 1);
+xn = xNmin:xNmax;
+x1 = stage(xNmin, xNmax, 0);
+x2 = stage(xNmin, xNmax, -1);
 
-y = x1 + x2;
+yn = yNmin:yNmax;
+y = yn;
+y(1) = 0;
+y(1, 2:end) = x1 + x2;
 
 figure(2);
-stem(n, y)
+subplot(3, 1, 1)
+stem(xn, x1)
+grid on
+
+subplot(3, 1, 2)
+stem(xn, x2)
+grid on
+
+subplot(3, 1, 3)
+stem(yn, y)
+grid on
 
 %% c)
-% show y[n] = log(x[n]) is not linear
+% show y[n] = log(x[n]) is not stable
 
 clear;
 clc;
-Nmin = 0;
+Nmin = -1;
 Nmax = 10;
 
-t = linspace(0, 10, 100);
+t = linspace(-1, 10, 110);
 n = Nmin:Nmax;
 
 y1 = log(t);
@@ -68,10 +86,12 @@ figure(3);
 plot(t, y1);
 hold on
 stem(n, y2);
+grid on
 hold off
+grid on
 
 %% d)
-% system in a) is not invertible;
+% system in a) y[n] = sin((pi/2)x[n]) is not invertible;
 
 clear;
 clc;
@@ -84,10 +104,13 @@ y1 = sin((pi / 4) * x1);
 x2 = 3 .* x1;
 y2 = sin((pi / 4) * x2);
 figure(4);
-stem(n, y2, 'b+');
+stem(n, y2, 'b+', 'MarkerSize', 15);
+grid on
 hold on
-stem(n, y1, 'ro');
+stem(n, y1, 'ro', 'MarkerSize', 15);
+grid on
 hold off
+grid on
 
 %%% give conunter-argument of oriperties: linear, time-invariant, causal, stable and invertible
 
@@ -112,8 +135,9 @@ y1 = x1.^3;
 x2 = 2 .* n;
 y2 = x2.^3;
 
-stem(n, 2 .* y1, 'ro');
-stem(n, y2, 'b+')
+stem(n, 2 .* y1, 'ro', 'MarkerSize', 15);
+stem(n, y2, 'b+', 'MarkerSize', 15)
+grid on
 
 % time-invariant: True
 
@@ -137,7 +161,7 @@ figure(6);
 
 % time-invariant: False
 % x_1[n] = n
-% x_2[n] = n - 1 = x[n - 1]
+% x_2[n] = x[n - 1] = n - 1
 % y_1[n] = n^2
 % y_2[n] = n^2 - n
 % y_1[n - 1] = (n - 1)^2 != y_2[n]
@@ -153,18 +177,25 @@ stem(n, 2 .* y1, 'ro');
 hold on
 stem(n, y2, 'b+');
 stem(n, y1_, 'bo');
+grid on
+
+hold off
+grid on
 
 % causal: True
 
 % stable: False
-% x[n] = stage(n) bounded in [0, 1]
-% y[n] = n stage(n) is not bounded. [0, Infinity)
-
+% x[n] = stage[n] bounded in [0, 1]
+% y[n] = n stage[n] is not bounded. [0, Infinity)
 x = stage(Nmin, Nmax, 0);
 y = n .* x;
 
 subplot(3, 1, 2);
 stem(n, y, 'ro');
+grid on
+
+hold off
+grid on
 
 % invertible: False
 % x_1[n] = delta[n]
@@ -180,8 +211,10 @@ subplot(3, 1, 3);
 stem(n, y1, 'ro');
 hold on
 stem(n, y2, 'b+');
+grid on
 
 hold off
+grid on
 
 %% g)
 % y[n] = x[2n]
@@ -192,7 +225,6 @@ Nmin = -5;
 Nmax = 5;
 n = Nmin:Nmax;
 figure(7)
-hold on
 
 % linear: True
 
@@ -214,6 +246,10 @@ stem(n, y1, 'ro');
 hold on
 stem(n, y2, 'bo');
 stem(n, y1_, 'b+');
+grid on
+
+hold off
+grid on
 
 % causal: False
 % x[n] = stage[n - 1]
@@ -226,6 +262,7 @@ subplot(3, 1, 2);
 stem(n, x, 'ro');
 hold on
 stem(n, y, 'bo');
+grid on
 
 % stable: True
 
@@ -241,6 +278,10 @@ subplot(3, 1, 3);
 stem(n, y1, 'ro');
 hold on
 stem(n, y2, 'b+');
+grid on
+
+hold off
+grid on
 
 %%% work1.5
 
@@ -269,9 +310,18 @@ y2 = diffeqn(a, x2, yn1);
 figure(8)
 subplot(2, 1, 1);
 stem(n, y1, 'ro');
+grid on
 hold on;
+
+hold off
+grid on
+
 subplot(2, 1, 2);
 stem(n, y2, 'bo');
+grid on
+
+hold off
+grid on
 
 %% c)
 % a = 1, yn1 = -1, 0 <= n <= 30
@@ -296,11 +346,24 @@ y3 = 2 * y1 - y2;
 figure(9);
 subplot(3, 1, 1);
 stem(n, y1, 'ro');
+grid on
 hold on
+
+hold off
+grid on
+
 subplot(3, 1, 2);
 stem(n, y2, 'go');
+
+hold off
+grid on
+
 subplot(3, 1, 3);
 stem(n, y3, 'bo');
+grid on
+
+hold off
+grid on
 
 %% d)
 % a = 1/2, x[n] = stage[n], 0 <= n <= 30;
@@ -320,6 +383,11 @@ y2 = diffeqn(a, x, yn12);
 figure(10);
 subplot(2, 1, 1);
 stem(n, y1, 'ro');
+grid on
 hold on
+grid on
 subplot(2, 1, 2);
 stem(n, y2, 'bo');
+
+hold off
+grid on
