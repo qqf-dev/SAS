@@ -8,8 +8,8 @@ a=[1 2*exp(-(pi/2)*1i) exp((pi/4)*1i) exp(-(pi/4)*1i) 2*exp((pi/2)*1i)];
 %c
 figure(1);
 x=5*ifft(a);
-subplot(2,1,1),stem(0:4,real(x)),xlabel('n'),ylabel('x[n]'),title('real');
-subplot(2,1,2),stem(0:4,imag(x)),xlabel('n'),ylabel('x[n]'),title('imag');
+subplot(2,1,1),stem(0:4,real(x)),grid on,xlabel('n'),ylabel('x[n]'),title('real');
+subplot(2,1,2),stem(0:4,imag(x)),grid on,xlabel('n'),ylabel('x[n]'),title('imag');
 
 %d
 figure(2);
@@ -23,18 +23,18 @@ x2=[ones(1,8) zeros(1,8)];
 x22=[x2 x2 x2 x2];
 x3=[ones(1,8) zeros(1,24)];
 x33=[x3 x3];
-subplot(3,1,1),stem(X,x11),xlabel('n'),ylabel('x1[n]'),title('x1[n]');
-subplot(3,1,2),stem(X,x22),xlabel('n'),ylabel('x2[n]'),title('x2[n]');
-subplot(3,1,3),stem(X,x33),xlabel('n'),ylabel('x3[n]'),title('x3[n]');
+subplot(3,1,1),stem(X,x11),grid on,xlabel('n'),ylabel('x1[n]'),title('x1[n]');
+subplot(3,1,2),stem(X,x22),grid on,xlabel('n'),ylabel('x2[n]'),title('x2[n]');
+subplot(3,1,3),stem(X,x33),grid on,xlabel('n'),ylabel('x3[n]'),title('x3[n]');
 
 %e
 figure(3);
 a1=fft(x1)/64;
 a2=fft(x2)/64;
 a3=fft(x3)/64;
-subplot(3,1,1),stem([1:8],abs(a1)),xlabel('n'),ylabel('a1'),title('the DTFS coefficient of x1[n]');
-subplot(3,1,2),stem([1:16],abs(a2)),xlabel('n'),ylabel('a2'),title('the DTFS coefficient of x2[n]');
-subplot(3,1,3),stem([1:32],abs(a3)),xlabel('n'),ylabel('a3'),title('the DTFS coefficient of x3[n]');
+subplot(3,1,1),stem([1:8],abs(a1)),grid on,xlabel('n'),ylabel('a1'),title('the DTFS coefficient of x1[n]');
+subplot(3,1,2),stem([1:16],abs(a2)),grid on,xlabel('n'),ylabel('a2'),title('the DTFS coefficient of x2[n]');
+subplot(3,1,3),stem([1:32],abs(a3)),grid on,xlabel('n'),ylabel('a3'),title('the DTFS coefficient of x3[n]');
 
 %fg
 figure(4);
@@ -77,12 +77,12 @@ for j=-15:16
         x3_all=x3_all+a33(j+1)*exp(2*pi/32*n*1i*j);
     end
 end
-subplot(4,1,1),stem(n,real(x3_2)),xlabel('n'),ylabel('x3_2[n]');
-subplot(4,1,2),stem(n,real(x3_8)),xlabel('n'),ylabel('x3_8[n]');
-subplot(4,1,3),stem(n,real(x3_12)),xlabel('n'),ylabel('x3_12[n]');
-subplot(4,1,4),stem(n,real(x3_all)),xlabel('n'),ylabel('x3_all[n]');
+subplot(4,1,1),stem(n,real(x3_2)),grid on,xlabel('n'),ylabel('x3_2[n]');
+subplot(4,1,2),stem(n,real(x3_8)),grid on,xlabel('n'),ylabel('x3_8[n]');
+subplot(4,1,3),stem(n,real(x3_12)),grid on,xlabel('n'),ylabel('x3_12[n]');
+subplot(4,1,4),stem(n,real(x3_all)),grid on,xlabel('n'),ylabel('x3_all[n]');
 
 %h
 figure(5);
-subplot(2,1,1),stem(n,real(x3_all)),xlabel('n'),ylabel('x3_all[n]');
-subplot(2,1,2),stem(n,x3),xlabel('n'),ylabel('x3[n]');
+subplot(2,1,1),stem(n,real(x3_all)),grid on,xlabel('n'),ylabel('x3_all[n]');
+subplot(2,1,2),stem(n,x3),grid on,xlabel('n'),ylabel('x3[n]');
