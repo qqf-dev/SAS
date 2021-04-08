@@ -74,7 +74,7 @@ figure(2)
 subplot(2,1,1),stem(wk, a_x);
 grid on;
 xlabel('\omega_k=(2\pi/20)k','fontsize',15)
-ylabel('a_k','fontsize',15)
+ylabel('H_1(e^{j\omega}) and H_2(e^{j\omega})','fontsize',15)
 title('DTFS coefficients of x[n]','FontSize',18)
 subplot(2,1,2),plot(w1,abs(H1),'r-');
 hold on;
@@ -130,8 +130,13 @@ a_y1 = fft(y1_20)/length(y1_20);
 a_y2 = fft(y2_20)/length(y2_20);
 
 figure(5)
-subplot(2,1,1), stem(abs(a_y1));
-grid on;
-subplot(2,1,2), stem(abs(a_y2));
-grid on;
 
+
+y1_20=y1(1:20);
+y2_20=y2(1:20);
+a_y1=fft(y1_20)/20;
+a_y2=fft(y2_20)/20;
+subplot(2,1,1),stem(-10:9,fftshift(abs(a_y1))),grid on,xlabel('k'),ylabel('a_{y_1}');
+title('DTFS coefficients of y_1','fontsize',18)
+subplot(2,1,2),stem(-10:9,fftshift(abs(a_y2))),grid on,xlabel('k'),ylabel('a_{y_2}');
+title('DTFS coefficients of y_2','fontsize',18)
