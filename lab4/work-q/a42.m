@@ -23,7 +23,7 @@ item:g
 
 clear;
 clc;
-clf;
+close all;
 
 %% samples of signal y(t) = x(t-5) = yp(t)
 
@@ -36,11 +36,12 @@ t = 0:tau:(T - tau);
 %% in t = [5+tau:tau:T-tau] y(t) = e^(-2t+10)
 
 y = [exp(2 * (0:tau:5) - 10), exp(-2 * (5 + tau:tau:(T - tau)) + 10)];
+figure(11)
+plot(t,y)
 
-figure(1);
-plot(t, y);
 xlabel("t", "fontsize", 15);
 ylabel("y(t)", "fontsize", 15);
+title("signal y(t)", "fontsize", 18)
 
 N = length(y);
 
@@ -51,11 +52,13 @@ Y = fftshift(tau * fft(y));
 lb = (1 - N) * pi / N / tau;
 ub = (N - 1) * pi / N / tau;
 step = 2 * pi / N / tau;
-figure(2)
-plot(lb:step:ub, abs(Y), 'r-', 'LineWidth', 2);
-xlabel('\omega', 'FontSize', 15);
-ylabel('abs(Y)', 'FontSize', 15);
-legend('\tau=0.5,N=1000', 'FontSize', 12)
+
+figure(12) 
+plot(lb:step:ub,abs(Y))
+
+xlabel("\omega", "fontsize", 15);
+ylabel("abs(Y)", "fontsize", 15);
+title("fft of signal y(t)", "fontsize", 18)
 
 %%% d)
 
@@ -67,25 +70,54 @@ w = -(pi / tau) + (0:N - 1) * (2 * pi / (N * tau));
 %% X = e^(-5jw)Y
 
 X = exp(-5j*w) .* Y;
-figure(3)
-plot(w,X);
-xlabel('\omega', 'FontSize', 15);
-ylabel('abs(X)', 'FontSize', 15);
-
-figure(4)
-plot(w,real(X));
-hold on
-plot(w,real(Y))
-xlabel('\omega', 'FontSize', 15);
-ylabel('Re(X)', 'FontSize', 15);
-legend('X','Y','FontSize', 12)
-
-figure(5)
-plot(w,imag(X));
-hold on
-plot(w,imag(Y))
-xlabel('\omega', 'FontSize', 15);
-ylabel('Im(X)', 'FontSize', 15);
-legend('X','Y','FontSize', 12)
 
 %%% f)
+figure(1);
+title("CTFT of signal x(t) by fft", "fontsize", 18);
+subplot(211),plot(w, abs(X));
+xlabel("\omega", "fontsize", 15);
+ylabel("abs(X)", "fontsize", 15); 
+title("CTFT of signal x(t) by theory", "fontsize", 18);
+subplot(212),plot(w, unwrap(angle(X)));
+xlabel("\omega", "fontsize", 15);
+ylabel("phase(X)", "fontsize", 15);
+
+X_ =1./(2+1j.*w)+1./(2-1j.*w);
+
+figure(2)
+subplot(211),plot(w, abs(X_));
+xlabel("\omega", "fontsize", 15);
+ylabel("abs(X(j\omega))", "fontsize", 15);
+title("CTFT of signal x(t) by theory", "fontsize", 18);
+subplot(212),plot(w, unwrap(angle(X_)));
+xlabel("\omega", "fontsize", 15);
+ylabel("phase(X(j\omega))", "fontsize", 15);
+
+figure(3)
+semilogy(w,abs(X));
+hold on
+semilogy(w,abs(X_));
+xlabel("\omega", "fontsize", 15);
+ylabel("log(abs(X(j\omega)))", "fontsize", 15);
+title("different of CTFT of signal x(t)", "fontsize", 18);
+legend("X","X(j\omega)");
+
+%%% g)
+
+figure(4)
+subplot(211),plot(w,abs(Y));
+xlabel("\omega", "fontsize", 15);
+ylabel("abs(Y)", "fontsize", 15);
+subplot(212),plot(w,unwrap(angle(Y)));
+xlabel("\omega", "fontsize", 15);
+ylabel("phase(Y)", "fontsize", 15);
+
+figure(5)
+semilogy(w,abs(Y));
+hold on
+semilogy(w,abs(X));
+xlabel("\omega", "fontsize", 15);
+ylabel("log(abs(X(j\omega)))", "fontsize", 15);
+title("different of X and Y", "fontsize", 18);
+
+legend("Y","X");
