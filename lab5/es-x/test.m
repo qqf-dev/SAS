@@ -1,0 +1,24 @@
+clc;
+clear;
+
+figure(1);
+fs=8000;[b,a]=butter(2,400/(fs/2));
+[h,f]=freqz(b,a,512,fs);
+plot(f,20*log10(abs(h)));
+axis([0 5000 -50 5]);
+xlabel('Frequency(Hz)');
+ylabel('Magnitude');
+figure(2);
+[b,a]=butter(2,400/(fs/2),'high');
+[h,f]=freqz(b,a,512,fs);
+plot(f,20*log10(abs(h)));
+axis([0 5000 -50 5]);
+xlabel('Frequency(Hz)');
+ylabel('Magnitude');
+figure(3);
+[b,a]=butter(2,[400 1000]/(fs/2));
+[h,f]=freqz(b,a,512,fs);
+plot(f,20*log10(abs(h)));
+axis([0 5000 -50 5]);
+xlabel('Frequency(Hz)');
+ylabel('Magnitude');
