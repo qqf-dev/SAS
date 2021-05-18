@@ -11,14 +11,27 @@ clc;
 close all;
 
 % load audio file 01
-
 [s,fs] = audioread('C_01_01.wav');
-
-% set low pass filter (50Hz) l1 : a1, b1
 
 s = s';
 
-[b1, a1] = butter(2, 50/(fs/2));
+y1 = toneVocoder(s,1,fs,50);
+y2 = toneVocoder(s,2,fs,50);
+y3 = toneVocoder(s,4,fs,50);
+y4 = toneVocoder(s,6,fs,50);
+y5 = toneVocoder(s,8,fs,50);
 
-y = filter(b1,a1,s);
+y = toneVocoder(s,8,fs,600);
+
+sound(y,fs)
+pause(5)
+
+ym = melVocoder(s,20,fs,600);
+sound(ym,fs)
+
+
+
+
+pause(5)
+sound(s,fs
 
