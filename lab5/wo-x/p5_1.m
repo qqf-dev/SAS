@@ -43,10 +43,13 @@ title('power spectra density of SSN'),xlabel('w'),ylabel('pyy');
 
 %5.2
 snr=-5;
-ssn=ssn/(norm(ssn)*(10^(snr/20)))*norm(y1);%find ssn
-SNR=20*log10(norm(y1)/norm(ssn));
-y=y1+ssn;%use function to find y
-y2=y*norm(y1)/norm(y);%Energy normalization
+ssn1=ssn/(norm(ssn)*(10^(snr/20)))*norm(y1);%find ssn
+SNR=20*log10(norm(y1)/norm(ssn1));
+y=y1+ssn1;%use function to find y
+yy=y*norm(y1)/norm(y);%Energy normalization
+nSSN=norm(ssn)
+nSSN1=norm(ssn1)
+A=norm(y1)/(10^(-0.25))
 
 %5.3a
 % fs=16000;
