@@ -35,6 +35,9 @@ function s_out = toneVocoder(s, N, fs, f_cut)
         % generate band pass filter
         [b, a] = butter(4, [f1 f2] / (fs / 2));
 
+        [H w] = freqz(b,a,512);
+        plot(w,abs(H)), hold on;
+
         % produce bandpass signal
         y = filter(b, a, s);
 

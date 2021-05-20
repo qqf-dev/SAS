@@ -15,27 +15,41 @@ close all;
 
 s = s';
 
-y1 = toneVocoder(s,1,fs,50);
-y2 = toneVocoder(s,2,fs,50);
-y3 = toneVocoder(s,4,fs,50);
-y4 = toneVocoder(s,6,fs,50);
-y5 = toneVocoder(s,8,fs,50);
+% the cutoff frequency
+fc = 50;
 
-y = toneVocoder(s,8,fs,600);
+y1 = toneVocoder(s,1,fs,fc);
+y2 = toneVocoder(s,2,fs,fc);
+y3 = toneVocoder(s,4,fs,fc);
+y4 = toneVocoder(s,6,fs,fc);
+y5 = toneVocoder(s,8,fs,fc);
 
-sound(y,fs)
-pause(5)
+audiowrite('ToneVoice_N1_Fc50.wav',y1,fs);
+audiowrite('ToneVoice_N2_Fc50.wav',y2,fs);
+audiowrite('ToneVoice_N4_Fc50.wav',y3,fs);
+audiowrite('ToneVoice_N6_Fc50.wav',y4,fs);
+audiowrite('ToneVoice_N8_Fc50.wav',y5,fs);
 
-% ym = melVocoder(s,20,fs,600);
-% sound(ym,fs)
+% using melVocoder2
 
-pause(5);
+ym1 = melVocoder(s,1,fs,fc);
+ym2 = melVocoder(s,2,fs,fc);
+ym3 = melVocoder(s,4,fs,fc);
+ym4 = melVocoder(s,6,fs,fc);
+ym5 = melVocoder(s,8,fs,fc);
 
-ym2 = melVocoder2(s,16,fs,400);
-sound(ym2,fs)
+% audiowrite('MelVoice_N1_Fc50.wav',ym1,fs);
+% audiowrite('MelVoice_N2_Fc50.wav',ym2,fs);
+% audiowrite('MelVoice_N4_Fc50.wav',ym3,fs);
+% audiowrite('MelVoice_N6_Fc50.wav',ym4,fs);
+% audiowrite('MelVoice_N8_Fc50.wav',ym5,fs);
 
-pause(5)
-sound(s,fs);
+y = toneVocoder(s,32,fs,50);
+ym = melVocoder(s,32,fs,50);
+ym2 = melVocoder2(s,32,fs,50);
+
+
+% sound(s,fs);
 
 
 
