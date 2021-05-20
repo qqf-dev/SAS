@@ -26,12 +26,16 @@ y = toneVocoder(s,8,fs,600);
 sound(y,fs)
 pause(5)
 
-ym = melVocoder(s,20,fs,600);
-sound(ym,fs)
+% ym = melVocoder(s,20,fs,600);
+% sound(ym,fs)
 
+pause(5);
 
-
+ym2 = melVocoder2(s,16,fs,400);
+sound(ym2,fs)
 
 pause(5)
-sound(s,fs
+sound(s,fs);
+
+
 
