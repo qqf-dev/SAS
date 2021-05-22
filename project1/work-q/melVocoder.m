@@ -9,14 +9,14 @@ function s_out = melVocoder(s, N, fs, f_cut)
     %
     % Long description
 
-    % using mel filter
+    % using mel filter bank (triangular bandpass filters)
     % mel(f) = 2595 * log(1+f/700)
-    % so between the speech frequency: 20 ~ 7000 Hz the total length is mel_7000 - nel_20
+    % so between the speech frequency: 20 ~ 7000 Hz the total mel frequency distance is mel_7000 - mel_20
 
     mel_7000 = 2595 * log10(1 + 7000/700);
-    mel_20 = 2595 * log10(1 + 20/700);
+    mel_200 = 2595 * log10(1 + 200/700);
 
-    melF = linspace(20, mel_7000 - mel_20,N+2);
+    melF = linspace(200, mel_7000 - mel_200,N+2);
 
     F = 700 .* (10.^(melF./2595)-1);
 
@@ -26,16 +26,13 @@ function s_out = melVocoder(s, N, fs, f_cut)
 
     for li = 1:N
         fl = F(li);
-        fm = F(li+1);
+        fm = F(li+1); 
         fr = F(li+2);
-        [b,a] = TriFilter(1024, [fl fm fr]/(fs/2));
-
-        [H w] = freqz(b,a,512);
-        plot(w,abs(H)), hold on;
+        [b,a] = TriFilter(3000, [fl fm fr]/(fs/2));
 
         y = filter(b, a, s);
 
-        %% get envelope
+        %% get abstract value
         y = abs(y);
         % using LPF to get envelope
         [bl, al] = butter(4, f_cut / (fs / 2));

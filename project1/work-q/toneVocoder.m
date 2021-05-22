@@ -11,12 +11,12 @@ function s_out = toneVocoder(s, N, fs, f_cut)
 
     % according to the function of frequency sensitivities distribution of cochlea
     % f = 165.4 * (10^(0.06d) - 1), d = log(f/165.4+1) / 0.06
-    % so between the speech frequency: 20 ~ 7000 Hz the total length is d_7000 - d_20
+    % so between the speech frequency: 200 ~ 7000 Hz the total length is d_7000- d_200
 
     d_7000 = log10(7000/165.4 + 1) / 0.06;
-    d_20 = log10(600/165.4 + 1) / 0.06;
+    d_200 = log10(200/165.4 + 1) / 0.06;
 
-    D = d_7000 - d_20;
+    D = d_7000 - d_200;
 
     % depart total length uniformly
     d = D / N;
@@ -25,7 +25,7 @@ function s_out = toneVocoder(s, N, fs, f_cut)
 
     for li = 1:N
         % lower frequency limit
-        d1 = d_20 + (li - 1) * d;
+        d1 = d_200 + (li - 1) * d;
         f1 = 165.4 * (10^(0.06 * d1) - 1);
 
         % higher frequency limit
@@ -34,9 +34,6 @@ function s_out = toneVocoder(s, N, fs, f_cut)
 
         % generate band pass filter
         [b, a] = butter(4, [f1 f2] / (fs / 2));
-
-        [H w] = freqz(b,a,512);
-        plot(w,abs(H)), hold on;
 
         % produce bandpass signal
         y = filter(b, a, s);
