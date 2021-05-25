@@ -38,14 +38,17 @@ ym3 = melVocoder2(s, 4, fs, fc);
 ym4 = melVocoder2(s, 6, fs, fc);
 ym5 = melVocoder2(s, 8, fs, fc);
 
-% audiowrite('MelVoice_N1_Fc50.wav',ym1,fs);
-% audiowrite('MelVoice_N2_Fc50.wav',ym2,fs);
-% audiowrite('MelVoice_N4_Fc50.wav',ym3,fs);
-% audiowrite('MelVoice_N6_Fc50.wav',ym4,fs);
-% audiowrite('MelVoice_N8_Fc50.wav',ym5,fs);
+audiowrite('MelVoice_N1_Fc50.wav',ym1,fs);
+audiowrite('MelVoice_N2_Fc50.wav',ym2,fs);
+audiowrite('MelVoice_N4_Fc50.wav',ym3,fs);
+audiowrite('MelVoice_N6_Fc50.wav',ym4,fs);
+audiowrite('MelVoice_N8_Fc50.wav',ym5,fs);
 
 y = toneVocoder(s, 128, fs, fc);
 ym = melVocoder2(s, 128, fs, fc);
+
+audiowrite('ToneVoice_N128_Fc50.wav',ym,fs);
+audiowrite('MelVoice_N128_Fc50.wav',ym,fs);
 
 [S,w] = ctft(s,fs);
 
@@ -104,64 +107,119 @@ subplot(312),plot(wy, abs(Y))
 [Ym,wm] = ctft(ym,fs);
 subplot(313),plot(wm, abs(Ym))
 
-% [Pxx0,w0]=pwelch(s,[],[],512,fs); 
-% [Pxx1,w1]=pwelch(y1,[],[],512,fs); 
-% [Pxx2,w2]=pwelch(y2,[],[],512,fs);
-% [Pxx3,w3]=pwelch(y3,[],[],512,fs);
-% [Pxx4,w4]=pwelch(y4,[],[],512,fs);
-% [Pxx5,w5]=pwelch(y5,[],[],512,fs); 
-% [Pxxy,wy]=pwelch(y,[],[],512,fs); 
+[Pxx0,wx0]=pwelch(s,[],[],512,fs); 
+[Pxx1,wx1]=pwelch(y1,[],[],512,fs); 
+[Pxx2,wx2]=pwelch(y2,[],[],512,fs);
+[Pxx3,wx3]=pwelch(y3,[],[],512,fs);
+[Pxx4,wx4]=pwelch(y4,[],[],512,fs);
+[Pxx5,wx5]=pwelch(y5,[],[],512,fs); 
+[Pxxy,wyx]=pwelch(y,[],[],512,fs); 
 
-% [Pxxm1,wm1]=pwelch(ym1,[],[],512,fs); 
-% [Pxxm2,wm2]=pwelch(ym2,[],[],512,fs);
-% [Pxxm3,wm3]=pwelch(ym3,[],[],512,fs);
-% [Pxxm4,wm4]=pwelch(ym4,[],[],512,fs);
-% [Pxxm5,wm5]=pwelch(ym5,[],[],512,fs); 
-% [Pxxm,wm]=pwelch(ym,[],[],512,fs); 
+[Pxxm1,wmx1]=pwelch(ym1,[],[],512,fs); 
+[Pxxm2,wmx2]=pwelch(ym2,[],[],512,fs);
+[Pxxm3,wmx3]=pwelch(ym3,[],[],512,fs);
+[Pxxm4,wmx4]=pwelch(ym4,[],[],512,fs);
+[Pxxm5,wmx5]=pwelch(ym5,[],[],512,fs); 
+[Pxxm,wmx]=pwelch(ym,[],[],512,fs); 
 
-% figure(7)
-% subplot(311),plot(w0,10*log10(Pxx0)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('original');
-% hold on;
-% subplot(311),plot(w1,10*log10(Pxx1)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=1');
-% subplot(311),plot(wm1,10*log10(Pxxm1)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=1');
+figure(7)
+subplot(311),plot(wx0,10*log10(Pxx0)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('original');
+hold on;
+subplot(311),plot(wx1,10*log10(Pxx1)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=1');
+subplot(311),plot(wmx1,10*log10(Pxxm1)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=1');
 
-% subplot(312),plot(w0,10*log10(Pxx0)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('original');
-% hold on;
-% subplot(312),plot(w2,10*log10(Pxx2)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=2');
-% subplot(312),plot(wm2,10*log10(Pxxm2)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=3');
+subplot(312),plot(wx0,10*log10(Pxx0)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('original');
+hold on;
+subplot(312),plot(wx2,10*log10(Pxx2)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=2');
+subplot(312),plot(wmx2,10*log10(Pxxm2)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=3');
 
-% subplot(313),plot(w0,10*log10(Pxx0)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('original');
-% hold on;
-% subplot(313),plot(w3,10*log10(Pxx3)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=4');
-% subplot(313),plot(wm3,10*log10(Pxxm3)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=4');
+subplot(313),plot(wx0,10*log10(Pxx0)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('original');
+hold on;
+subplot(313),plot(wx3,10*log10(Pxx3)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=4');
+subplot(313),plot(wmx3,10*log10(Pxxm3)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=4');
 
-% figure(8)
+figure(8)
 
-% subplot(311),plot(w0,10*log10(Pxx0)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('original');
-% hold on;
-% subplot(311),plot(w4,10*log10(Pxx4)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=6');
-% subplot(311),plot(wm4,10*log10(Pxxm4)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=6');
+subplot(311),plot(wx0,10*log10(Pxx0)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('original');
+hold on;
+subplot(311),plot(wx4,10*log10(Pxx4)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=6');
+subplot(311),plot(wmx4,10*log10(Pxxm4)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=6');
 
-% subplot(312),plot(w0,10*log10(Pxx0)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('original');
-% hold on;
-% subplot(312),plot(w5,10*log10(Pxx5)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=8');
-% subplot(312),plot(wm5,10*log10(Pxxm5)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=18');
+subplot(312),plot(wx0,10*log10(Pxx0)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('original');
+hold on;
+subplot(312),plot(wx5,10*log10(Pxx5)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=8');
+subplot(312),plot(wmx5,10*log10(Pxxm5)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=18');
 
-% subplot(313),plot(w0,10*log10(Pxx0)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('original');
-% hold on;
-% subplot(313),plot(wy,10*log10(Pxxy)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=128');
-% subplot(313),plot(wm,10*log10(Pxxm)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=128');
-
-
+subplot(313),plot(wx0,10*log10(Pxx0)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('original');
+hold on;
+subplot(313),plot(wyx,10*log10(Pxxy)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=128');
+subplot(313),plot(wmx,10*log10(Pxxm)),grid on,xlabel('frequency/Hz'),ylabel('pwelch/dB');title('N=128');
 
 
-ymn1 = melVocoder(s, 1, fs, fc);
-ymn2 = melVocoder(s, 2, fs, fc);
-ymn3 = melVocoder(s, 4, fs, fc);
-ymn4 = melVocoder(s, 6, fs, fc);
-ymn5 = melVocoder(s, 8, fs, fc);
+dt = 1/fs;
 
-% sound(s,fs);
+t = 1/fs:dt:length(s)/fs;
+
+figure(9)
+
+subplot(211),plot(t,s)
+hold on;
+subplot(211),plot(t,y2)
+
+subplot(212),plot(t,s)
+hold on;
+subplot(212),plot(t,ym2)
+
+figure(10)
+
+subplot(211),plot(t,s)
+hold on;
+subplot(211),plot(t,y1)
+
+subplot(212),plot(t,s)
+hold on;
+subplot(212),plot(t,ym1)
+
+figure(11)
+
+subplot(211),plot(t,s)
+hold on;
+subplot(211),plot(t,y3)
+
+subplot(212),plot(t,s)
+hold on;
+subplot(212),plot(t,ym3)
+
+figure(12)
+
+subplot(211),plot(t,s)
+hold on;
+subplot(211),plot(t,y4)
+
+subplot(212),plot(t,s)
+hold on;
+subplot(212),plot(t,ym4)
+
+figure(13)
+
+subplot(211),plot(t,s)
+hold on;
+subplot(211),plot(t,y5)
+
+subplot(212),plot(t,s)
+hold on;
+subplot(212),plot(t,ym5)
+
+figure(14)
+
+subplot(211),plot(t,s)
+hold on;
+subplot(211),plot(t,y)
+
+subplot(212),plot(t,s)
+hold on;
+subplot(212),plot(t,ym)
+
 
 
 
