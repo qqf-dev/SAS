@@ -1,11 +1,3 @@
-%{
-
-TODO:list
-item:Set LPF cutoff frequency to 50 Hz
-item:Implement tone - vocoder by changing the number of bands to N = 1, N = 2, N = 4, N = 6, and N = 8.
-item:Save the wave files for these conditions, and describe how the number of bands affects the intelligibility (i.e., how many words can be understood) of synthesized sentence.
-%}
-
 clear;
 clc;
 close all;

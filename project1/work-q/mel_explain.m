@@ -1,4 +1,33 @@
-function s_out = melVocoder2(s, N, fs, f_cut)
+clear;
+clc;
+close all;
+
+[s, fs] = audioread("C_01_01.wav");
+s = s';
+
+figure(1);
+
+fl = 300;
+fm = 2000;
+fh = 5000;
+
+[b1, a1] = TriFilter(3000, [fl, fm, fh]/(fs/2));
+[H1, w1] = freqz(b1, a1, 512);
+plot(w1, abs(H1));
+grid on;
+title("a trangular filter construction", 'fontsize', 18);
+xlabel("\omega", "fontsize", 15);
+ylabel("frequency response on frequency domain", "fontsize", 15);
+
+melVocodert(s, 8, fs, 50);
+
+figure(2);
+grid on;
+title("spectrum of mel bank between 20-7800Hz", 'fontsize', 18);
+xlabel("\omega", "fontsize", 15);
+ylabel("Filter amplitude", "fontsize", 15);
+
+function s_out = melVocodert(s, N, fs, f_cut)
     %toneVocoder - Description
     %
     % Syntax: s_out = toneVocoder(s,N,fs,f_cut)
@@ -16,17 +45,22 @@ function s_out = melVocoder2(s, N, fs, f_cut)
     mel_7800 = 2595 * log10(1 + 7800/700);
     mel_20 = 2595 * log10(1 + 20/700);
 
-    melF = linspace(mel_20, mel_7800-mel_20,N+2);
+    melF = linspace(mel_20, mel_7800 - mel_20, N + 2);
 
-    F = 700 .* (10.^(melF./2595)-1);
+    F = 700 .* (10.^(melF ./ 2595) - 1);
 
     s_out = zeros(1, length(s)); % generate vector s_out as same length with s
 
     for li = 1:N
         fl = F(li);
-        fm = F(li+1);
-        fr = F(li+2);
-        [b,a] = TriFilter(3000, [fl fm fr]/(fs/2));
+        fm = F(li + 1);
+        fr = F(li + 2);
+        [b, a] = TriFilter(3000, [fl fm fr] / (fs / 2));
+
+        % draw the mel bank
+        figure(2);
+        [H, w] = freqz(b, a, 512);
+        plot(w, abs(H)), hold on;
 
         y = filter(b, a, s);
 
@@ -52,15 +86,15 @@ function s_out = melVocoder2(s, N, fs, f_cut)
 
 end
 
-% build the triangular bandpass filter 
-function [b, a] = TriFilter(N,F)
+% build the triangular bandpass filter
+function [b, a] = TriFilter(N, F)
 
     %% the frequency response of TriFilter is close to triangular
 
     A = [0 0 0 1 0 0 0];
 
-    k1 = F(1)/2;
-    k2 = (1+ F(end))/2;
+    k1 = F(1) / 2;
+    k2 = (1 + F(end)) / 2;
 
     F = [0 k1 F k2 1];
 
