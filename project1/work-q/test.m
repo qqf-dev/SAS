@@ -9,8 +9,8 @@ f_cut = 50;
 
 figure(1);
 s1 = toneVocoder(s,N,fs,f_cut);
-% figure(2);
-% s2 = melVocoder(s,N,fs,f_cut);
+figure(2);
+s2 = melVocoder(s,N,fs,f_cut);
 
 
 
@@ -52,6 +52,7 @@ function s_out = toneVocoder(s, N, fs, f_cut)
         [b, a] = butter(4, [f1 f2] / (fs / 2));
 
         %%% draw the frequency response of filters
+        figure(1)
         [H,w] = freqz(b,a,512);
         plot(w,abs(H)),hold on; 
 
@@ -117,6 +118,7 @@ function s_out = melVocoder(s, N, fs, f_cut)
         [b,a] = TriFilter(3000, [fl fm fr]/(fs/2));
 
         %% draw the frequency response of filters
+        figure(2)
         [H,w] = freqz(b,a,512);
         plot(w,abs(H)),hold on; 
 
