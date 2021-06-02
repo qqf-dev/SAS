@@ -39,7 +39,7 @@ audiowrite('MelVoice_N8_Fc50.wav',ym5,fs);
 y = toneVocoder(s, 128, fs, fc);
 ym = melVocoder2(s, 128, fs, fc);
 
-audiowrite('ToneVoice_N128_Fc50.wav',ym,fs);
+audiowrite('ToneVoice_N128_Fc50.wav',y,fs);
 audiowrite('MelVoice_N128_Fc50.wav',ym,fs);
 
 [S,w] = ctft(s,fs);
@@ -350,7 +350,27 @@ ylabel('Amplitude');
 title('the amplitude of signal',"fontsize",18);
 legend("original signal","mel bank, N = 128")
 
+figure(15)
+plot(w,abs(S))
+hold on
 
+plot(w1,abs(Y1))
+plot(w2,abs(Y2))
+plot(w3,abs(Y3))
+plot(w4,abs(Y4))
+plot(w5,abs(Y5))
+legend("S","Y1","Y2","Y3","Y4","Y5")
+
+figure(16)
+plot(w,abs(S))
+hold on
+
+plot(wm1,abs(Ym1))
+plot(wm2,abs(Ym2))
+plot(wm3,abs(Ym3))
+plot(wm4,abs(Ym4))
+plot(wm5,abs(Ym5))
+legend("S","Ym1","Ym2","Ym3","Ym4","Ym5")
 
 
 
