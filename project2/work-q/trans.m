@@ -1,8 +1,6 @@
-function [t, transimission] = trans(S,wc)
+function [transimission,t] = trans(S,wc)
 
-    [t, xp] = DAC(S);
-
-    [t, xc] = holder(S);
+    [xc,t] = holder(S,1000);
 
     s = sin(2*pi*wc*t);
     c = cos(2*pi*wc*t);

@@ -1,89 +1,35 @@
-
 clear;
 clc;
 close all;
-
-x = rand (1,64);
-
-figure(1)
-stem(x);
-
-X = IDFT(x);
-
-T = cpAdder(X);
-
-figure(2)
-stem(abs(T));
+a = 1;
 
 wc = 10^8;
 
-[t,Tr] = trans(T,wc);
+hn = [0.5, 0, 0, 0.4, 0, 0.35, 0.3, 0];
+h = upsample(hn, 500);
 
-figure(3)
-plot(t,Tr);
+Hn = ChT(32, h, 4, wc, 250,1000);
 
-[b,a] = butter(4,wc/(10^9/2));
+figure(a);
+stem(Hn);
+a = a + 1;
 
-Tt = Tr.*cos(2*pi*wc*t);
+A = rand(1, 32);
+X = ifft(A) .* length(A);
+X_cp = cpAdder(X);
+[S, t] = trans(X_cp, wc);
+HS = conv(S, h);
+DS = demodulator(HS, wc);
+SN = ADC(DS, 500);
+SNA = SN(8+1:end-8);
+SNA = downsample(SNA, 2);
 
-y = filter(b,a,Tt);
+YN = fft(SNA) ./ length(SNA);
 
-figure(4)
-plot(t,y)
+YA = YN ./ Hn;
 
-x2 = rand(1,64);
-
-X2 = IDFT(x2);
-
-T2 = cpAdder(X2);
-
-[t,Tr2] = trans(T2,wc*5);
-
-Tn = Tr + Tr2;
-
-Ttt = Tn.*cos(2*pi*wc*t);
-Ttx = Tn.*cos(2*pi*5*wc*t);
-
-
-[b,a] = butter(4,wc/10^9);
-
-y2 = filter(b,a,Ttt);
-y3 = filter(b,a,Ttx);
-
-
-figure(5)
-plot(t,y2)
+figure(a);
+stem(YA);
 hold on
-plot(t,y3)
-
-
-
-h = [0.5,0,0,0.4,0,0.35,0.3,0];
-h = upsample(h,500);
-
-Trr = conv(Tr,h);
-
-rt = linspace(0,10^(-9)*(length(Trr)-1),length(Trr));
-
-[H,w] = ctft(Trr,10^9);
-figure(6)
-plot(w,abs(H))
-hold on
-[H1,w1] = ctft(Tr,10^9);
-plot(w1,abs(H1))
-
-
-[b,a] = butter(4,wc/10^9,'low');
-
-Trc = Trr.*cos(2*pi*wc*rt);
-Trs = Trr.*sin(2*pi*wc*rt);
-y4c = filter(b,a,Trc);
-y4s = filter(b,a,Trs);
-
-
-figure(7)
-plot(rt,y4c)
-hold on
-plot(rt,y4s);
-
-
+stem(A);
+a = a + 1;

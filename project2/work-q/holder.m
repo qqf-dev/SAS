@@ -1,14 +1,12 @@
-function [t,output] = holder(S)
+function [output,t] = holder(S,dO)
 
 
     % dt is 1ns
     dt = 1*10.^(-9);
     
-    dO = 1000;
-
     N = repmat(S,dO,1);
 
     output = reshape(N,1,[]);
 
-    t = 0:dt:length(S)*10.^(-6)-dt;
+    t = 0:dt:length(S)*(dO*dt)-dt;
 end

@@ -1,10 +1,13 @@
 function output = demodulator(s, wc)
 
+    dt = 10^(-9);
+    rt = linspace(0, (length(s) - 1) * dt, length(s));
+
     [b, a] = butter(4, wc / 10^9, 'low');
 
-    Trc = s .* cos(2 * pi * wc * rt);
-    Trs = s .* sin(2 * pi * wc * rt);
-    
+    Trc = 2 * s .* cos(2 * pi * wc * rt);
+    Trs = 2 * s .* sin(2 * pi * wc * rt) * 1j;
+
     outputC = filter(b, a, Trc);
     outputS = filter(b, a, Trs);
 
