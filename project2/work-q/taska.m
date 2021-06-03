@@ -3,7 +3,7 @@ clear;
 clc;
 close all;
 
-x = rand (1,32);
+x = rand (1,64);
 
 figure(1)
 stem(x);
@@ -31,7 +31,7 @@ y = filter(b,a,Tt);
 figure(4)
 plot(t,y)
 
-x2 = rand(1,32);
+x2 = rand(1,64);
 
 X2 = IDFT(x2);
 
@@ -45,7 +45,7 @@ Ttt = Tn.*cos(2*pi*wc*t);
 Ttx = Tn.*cos(2*pi*5*wc*t);
 
 
-[b,a] = butter(4,wc/(10^9/2));
+[b,a] = butter(4,wc/10^9);
 
 y2 = filter(b,a,Ttt);
 y3 = filter(b,a,Ttx);
@@ -59,7 +59,7 @@ plot(t,y3)
 
 
 h = [0.5,0,0,0.4,0,0.35,0.3,0];
-h = upsample(h,1000);
+h = upsample(h,500);
 
 Trr = conv(Tr,h);
 
@@ -73,14 +73,17 @@ hold on
 plot(w1,abs(H1))
 
 
-[b,a] = butter(4,wc/(10^9/2));
+[b,a] = butter(4,wc/10^9,'low');
 
-Trt = Trr.*cos(2*pi*wc*rt);
-y4 = filter(b,a,Trt);
+Trc = Trr.*cos(2*pi*wc*rt);
+Trs = Trr.*sin(2*pi*wc*rt);
+y4c = filter(b,a,Trc);
+y4s = filter(b,a,Trs);
+
 
 figure(7)
-plot(rt,y4)
+plot(rt,y4c)
 hold on
-plot(t,y);
+plot(rt,y4s);
 
 
