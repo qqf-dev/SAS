@@ -37,6 +37,12 @@ figure(a);
 plot(linspace(0, (length(DS) - 1) * (10^(-9)), length(DS)), DS);
 a = a + 1;
 
+
+[Hh,w] = ctft(DS,10^9);
+figure(a);
+plot(w,abs(Hh));
+a = a + 1;
+
 SN = ADC(DS, 500);
 
 figure(a);

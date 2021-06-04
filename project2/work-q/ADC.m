@@ -1,13 +1,12 @@
-function output = ADC(S, fs)
+function output = ADC(S, ts)
+    q = mod(length(S), ts);
 
-    q = mod(length(S), fs);
+    S = [S zeros(1, ts - q)];
 
-    S = [S zeros(1, fs - q)];
-
-    S_ = reshape(S, fs, []);
+    S_ = reshape(S, ts, []);
 
     output = sum(S_);
 
-    output = output / fs;
+    output = output / ts;
 
 end
