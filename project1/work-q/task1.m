@@ -351,26 +351,29 @@ title('the amplitude of signal',"fontsize",18);
 legend("original signal","mel bank, N = 128")
 
 figure(15)
-plot(w,abs(S))
-hold on
 
 plot(w1,abs(Y1))
+hold on
 plot(w2,abs(Y2))
 plot(w3,abs(Y3))
 plot(w4,abs(Y4))
 plot(w5,abs(Y5))
-legend("S","Y1","Y2","Y3","Y4","Y5")
+legend("Y1","Y2","Y3","Y4","Y5")
+title("The spectrum of all signal of Tone-Vocoder","fontsize",18)
+xlabel("\omega", "fontsize", 15);
+ylabel("fft", "fontsize", 15);
 
 figure(16)
-plot(w,abs(S))
-hold on
-
 plot(wm1,abs(Ym1))
+hold on
 plot(wm2,abs(Ym2))
 plot(wm3,abs(Ym3))
 plot(wm4,abs(Ym4))
 plot(wm5,abs(Ym5))
 legend("S","Ym1","Ym2","Ym3","Ym4","Ym5")
+title("The spectrum of all signal of Mel-Vocoder","fontsize",18)
+xlabel("\omega", "fontsize", 15);
+ylabel("fft", "fontsize", 15);
 
 
 
